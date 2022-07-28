@@ -4,7 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    /> -->
+    <link rel="stylesheet" href="styles.css" />
     <script src="./script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <header>FIGHT OF SHITPOSTS</header>
+    <main>
+      <div id="arena">
+        <div class="challenger">
+          <img src="./wasted.png" alt="wasted" id="user-wasted" />
+          <img src="./question.png" alt="user choice" id="user-fighter" />
+          <p>User: <span id="user-score">0</span></p>
+        </div>
+        <div class="challenger">
+          <img src="./wasted.png" alt="wasted" id="computer-wasted" />
+          <img src="./question.png"" alt="computer choice"
+          id="computer-fighter">
+          <p>Computer: <span id="computer-score">0</span></p>
+        </div>
+        <div id="message-box">
+          <p>Can't believe a damn stone is stronger than me!!</p>
+        </div>
+      </div>
+      <div class="text">
+        <p>Choose your fighter</p>
+      </div>
+      <div class="fighters">
+        <div class="fighter" onclick="playRound('amongus')">
+          <img src="./sus-blue.png" alt="amongus blue" />
+          <p>AmongSUS</p>
+        </div>
+        <div class="fighter" onclick="playRound('moai')">
+          <img src="./moai.png" alt="moai head" />
+          <p>Almighty Moai</p>
+        </div>
+        <div class="fighter" onclick="playRound('chungus')">
+          <img src="./chungus.png" alt="big chungus" />
+          <p>Big Chungus</p>
+        </div>
+      </div>
+      <div class="filler"></div>
+    </main>
+    <footer>
+      Copyright © 2022,
+      <a
+        href="https://github.com/CozmaRares"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Raru <i class="fa-brands fa-github"></i
+      ></a>
+      <br />
+      In conjunction with
+      <a
+        href="https://www.theodinproject.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        The Odin Project
+      </a>
+    </footer>
+    <audio style="display: none"></audio>
+  </body>
 </html>
