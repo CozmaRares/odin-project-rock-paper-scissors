@@ -4,72 +4,84 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- <link
+    <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-    /> -->
+    />
     <link rel="stylesheet" href="styles.css" />
     <script src="./script.js" defer></script>
   </head>
   <body>
-    <header>FIGHT OF SHITPOSTS</header>
+    <header>
+      <span onclick="openOverlay()" style="cursor: pointer"
+        >FIGHT OF SHITPOSTS</span
+      >
+    </header>
     <main>
       <div id="arena">
         <div class="challenger">
-          <img src="./wasted.png" alt="wasted" id="user-wasted" />
-          <img src="./question.png" alt="user choice" id="user-fighter" />
+          <img src="./images/wasted.png" alt="wasted" id="user-wasted" />
+          <img
+            src="./images/question.png"
+            alt="user choice"
+            id="user-fighter"
+          />
           <p>User: <span id="user-score">0</span></p>
         </div>
         <div class="challenger">
-          <img src="./wasted.png" alt="wasted" id="computer-wasted" />
-          <img src="./question.png"" alt="computer choice"
+          <img src="./images/wasted.png" alt="wasted" id="computer-wasted" />
+          <img src="./images/question.png"" alt="computer choice"
           id="computer-fighter">
           <p>Computer: <span id="computer-score">0</span></p>
         </div>
         <div id="message-box">
-          <p>Can't believe a damn stone is stronger than me!!</p>
+          <p></p>
         </div>
       </div>
-      <div class="text">
-        <p>Choose your fighter</p>
-      </div>
+      <div class="text">Choose your fighter</div>
       <div class="fighters">
         <div class="fighter" onclick="playRound('amongus')">
-          <img src="./sus-blue.png" alt="amongus blue" />
+          <img src="./images/sus-blue.png" alt="amongus blue" />
           <p>AmongSUS</p>
         </div>
         <div class="fighter" onclick="playRound('moai')">
-          <img src="./moai.png" alt="moai head" />
+          <img src="./images/moai.png" alt="moai head" />
           <p>Almighty Moai</p>
         </div>
         <div class="fighter" onclick="playRound('chungus')">
-          <img src="./chungus.png" alt="big chungus" />
+          <img src="./images/chungus.png" alt="big chungus" />
           <p>Big Chungus</p>
         </div>
       </div>
       <div class="filler"></div>
     </main>
-    <footer>
-      Copyright © 2022,
-      <a
-        href="https://github.com/CozmaRares"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Raru <i class="fa-brands fa-github"></i
-      ></a>
-      <br />
-      In conjunction with
-      <a
-        href="https://www.theodinproject.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        The Odin Project
-      </a>
-    </footer>
+
     <audio style="display: none"></audio>
+    <div id="overlay">
+      <div class="overlay-content">
+        <h1>Welcome to <span>Fight of SHITPOSTS</span></h1>
+        <div class="rules"></div>
+        <p class="close">Click anywhere to close, click title to open again</p>
+      </div>
+    </div>
   </body>
+  <script defer>
+    function closeOverlay() {
+      document.getElementById("overlay").style.display = "none";
+      document.removeEventListener("click", closeOverlay);
+    }
+
+    function openOverlay() {
+      document.getElementById("overlay").style.display = "block";
+      document.addEventListener("click", closeOverlay);
+    }
+
+    document.addEventListener("click", closeOverlay);
+
+    if (localStorage.getItem("__shitpost visited__")) closeOverlay();
+    else localStorage.setItem("__shitpost visited__", true);
+  </script>
 </html>
