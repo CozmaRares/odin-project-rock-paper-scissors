@@ -1,39 +1,41 @@
 const fighters = {
+    amongus: {
+      loss: '"Can\'t believe a damn stone is stronger than me!!"',
+      win: "This week's menu: rabbit stew",
+      sound: "./sounds/amongus.mp3",
+      png: "./images/sus-blue.png"
+    },
+    moai: {
+      loss: '"NOOOO, I am the ALMIGHTY MOAI, you can\'t just sit on me!!!"',
+      win: "The might of human is minuscule compared to the ALMIGHTY MOAI",
+      sound: "./sounds/boom-sound.mp3",
+      png: "./images/moai.png"
+    },
+    chungus: {
+      loss: "OmegaLuL imagine killing this absolute unit",
+      win: '"Ohh, look! I found a stone big enough to sit on"',
+      sound: "./sounds/chungus.mp3",
+      png: "./images/chungus.png"
+    }
+  },
+  fighterNames = Object.keys(fighters);
+
+const special = {
   amongus: {
-    loss: '"Can\'t believe a damn stone is stronger than me!!"',
-    win: "This week's menu: rabbit stew",
-    sound: "./sounds/amongus.mp3",
-    png: "./images/sus-blue.png",
-    special: "impostor"
-  },
-  moai: {
-    loss: '"NOOOO, I am the ALMIGHTY MOAI, you can\'t just sit on me!!!"',
-    win: "The might of human is minuscule compared to the ALMIGHTY MOAI",
-    sound: "./sounds/boom-sound.mp3",
-    png: "./images/moai.png",
-    special: "crimson"
-  },
-  chungus: {
-    loss: "OmegaLuL imagine killing this absolute unit",
-    win: '"Ohh, look! I found a stone big enough to sit on"',
-    sound: "./sounds/chungus.mp3",
-    png: "./images/chungus.png",
-    special: "daffy"
-  },
-  impostor: {
     message: "Computer was the impostor, the RNG gods were not on your side",
     sound: "./sounds/impostor-kill.mp3",
     png: "./images/sus-red.png"
   },
-  crimson: {
+  moai: {
     message:
       '"Once anyone witnesses King Crimson... they no longer exist in this world."',
     sound: "./sounds/king-crimson.mp3",
     png: "./images/moai-king-crimson.png"
   },
-  daffy: {
-    message: "",
-    sound: "./sounds/",
+  chungus: {
+    message:
+      '"Poor old Bugs. But, any way you look at it, it\'s better he should suffer."',
+    sound: "./sounds/daffy.mp3",
     png: "./images/daffy.png"
   },
   tie: {
@@ -50,10 +52,8 @@ const players = ["user", "computer"],
 let userScore = 0,
   computerScore = 0;
 
-function setFighter(who, fighter) {
-  document
-    .getElementById(`${who}-fighter`)
-    .setAttribute("src", fighters[fighter].png);
+function setFighter(who, pngPath) {
+  document.getElementById(`${who}-fighter`).setAttribute("src", pngPath);
 }
 
 function setScore(who, score) {
@@ -134,60 +134,68 @@ function updateUI(winner, score, message, sound) {
   );
 }
 
+function getFighter(idx) {
+  if (typeof idx !== "number") return;
+
+  return fighters[fighterNames[idx]];
+}
+
 function playRound(userSelection) {
   removeWasted();
 
   const computerSelection =
-    Math.random() > 0.3
-      ? "impostor" // 10% chance to get impostor
-      : Object.keys(fighters)[Math.floor(Math.random() * 3)];
+    Math.random() > 0.5 ? "special" : Math.floor(Math.random() * 3);
 
-  setFighter("user", userSelection);
-  setFighter("computer", computerSelection);
+  const userFighter = getFighter(userSelection);
+  const computerFighter =
+    typeof computerSelection === "number"
+      ? getFighter(computerSelection)
+      : special[fighterNames[userSelection]];
 
-  if (computerSelection === "impostor")
+  setFighter("user", userFighter.png);
+  setFighter("computer", computerFighter.png);
+
+  if (computerSelection === "special") {
     return updateUI(
       COMPUTER,
       ++computerScore,
-      fighters.impostor.message,
-      fighters.impostor.sound
+      computerFighter.message,
+      computerFighter.sound
     );
+  }
 
-  const userSelectionIndex = getIndex(userSelection),
-    computerSelectionIndex = getIndex(computerSelection);
+  if (userSelection === computerSelection)
+    return updateUI(NONE, 0, special.tie.message, special.tie.sound);
 
-  if (userSelectionIndex === computerSelectionIndex)
-    return updateUI(NONE, 0, fighters.tie.message, fighters.tie.sound);
-
-  if (Math.abs(userSelectionIndex - computerSelectionIndex) === 1)
-    if (userSelectionIndex > computerSelectionIndex)
+  if (Math.abs(userSelection - computerSelection) === 1)
+    if (userSelection > computerSelection)
       return updateUI(
         USER,
         ++userScore,
-        fighters[userSelection].win,
-        fighters[userSelection].sound
+        userFighter.win,
+        userFighter.sound
       );
     else
       return updateUI(
         COMPUTER,
         ++computerScore,
-        fighters[userSelection].loss,
-        fighters[computerSelection].sound
+        userFighter.loss,
+        computerFighter.sound
       );
 
-  if (userSelectionIndex < computerSelectionIndex)
+  if (userSelection < computerSelection)
     return updateUI(
       USER,
       ++userScore,
-      fighters[userSelection].win,
-      fighters[userSelection].sound
+      userFighter.win,
+      userFighter.sound
     );
   else
     return updateUI(
       COMPUTER,
       ++computerScore,
-      fighters[userSelection].loss,
-      fighters[computerSelection].sound
+      userFighter.loss,
+      computerFighter.sound
     );
 }
 
