@@ -1,21 +1,24 @@
-const data = {
+const fighters = {
   amongus: {
     loss: '"Can\'t believe a damn stone is stronger than me!!"',
     win: "This week's menu: rabbit stew",
     sound: "./sounds/amongus.mp3",
-    png: "./images/sus-blue.png"
+    png: "./images/sus-blue.png",
+    special: "impostor"
   },
   moai: {
     loss: '"NOOOO, I am the ALMIGHTY MOAI, you can\'t just sit on me!!!"',
     win: "The might of human is minuscule compared to the ALMIGHTY MOAI",
     sound: "./sounds/boom-sound.mp3",
-    png: "./images/moai.png"
+    png: "./images/moai.png",
+    special: "crimson"
   },
   chungus: {
     loss: "OmegaLuL imagine killing this absolute unit",
     win: '"Ohh, look! I found a stone big enough to sit on"',
     sound: "./sounds/chungus.mp3",
-    png: "./images/chungus.png"
+    png: "./images/chungus.png",
+    special: "daffy"
   },
   impostor: {
     message: "Computer was the impostor, the RNG gods were not on your side",
@@ -27,6 +30,11 @@ const data = {
       '"Once anyone witnesses King Crimson... they no longer exist in this world."',
     sound: "./sounds/king-crimson.mp3",
     png: "./images/moai-king-crimson.png"
+  },
+  daffy: {
+    message: "",
+    sound: "./sounds/",
+    png: "./images/daffy.png"
   },
   tie: {
     message: "Mind reading??!?!?!?",
@@ -45,7 +53,7 @@ let userScore = 0,
 function setFighter(who, fighter) {
   document
     .getElementById(`${who}-fighter`)
-    .setAttribute("src", data[fighter].png);
+    .setAttribute("src", fighters[fighter].png);
 }
 
 function setScore(who, score) {
@@ -94,7 +102,7 @@ function displayMessage(message, delay) {
 }
 
 function getIndex(choice) {
-  return Object.keys(data).indexOf(choice);
+  return Object.keys(fighters).indexOf(choice);
 }
 
 function playSound(source) {
@@ -132,7 +140,7 @@ function playRound(userSelection) {
   const computerSelection =
     Math.random() > 0.3
       ? "impostor" // 10% chance to get impostor
-      : Object.keys(data)[Math.floor(Math.random() * 3)];
+      : Object.keys(fighters)[Math.floor(Math.random() * 3)];
 
   setFighter("user", userSelection);
   setFighter("computer", computerSelection);
@@ -141,45 +149,45 @@ function playRound(userSelection) {
     return updateUI(
       COMPUTER,
       ++computerScore,
-      data.impostor.message,
-      data.impostor.sound
+      fighters.impostor.message,
+      fighters.impostor.sound
     );
 
   const userSelectionIndex = getIndex(userSelection),
     computerSelectionIndex = getIndex(computerSelection);
 
   if (userSelectionIndex === computerSelectionIndex)
-    return updateUI(NONE, 0, data.tie.message, data.tie.sound);
+    return updateUI(NONE, 0, fighters.tie.message, fighters.tie.sound);
 
   if (Math.abs(userSelectionIndex - computerSelectionIndex) === 1)
     if (userSelectionIndex > computerSelectionIndex)
       return updateUI(
         USER,
         ++userScore,
-        data[userSelection].win,
-        data[userSelection].sound
+        fighters[userSelection].win,
+        fighters[userSelection].sound
       );
     else
       return updateUI(
         COMPUTER,
         ++computerScore,
-        data[userSelection].loss,
-        data[computerSelection].sound
+        fighters[userSelection].loss,
+        fighters[computerSelection].sound
       );
 
   if (userSelectionIndex < computerSelectionIndex)
     return updateUI(
       USER,
       ++userScore,
-      data[userSelection].win,
-      data[userSelection].sound
+      fighters[userSelection].win,
+      fighters[userSelection].sound
     );
   else
     return updateUI(
       COMPUTER,
       ++computerScore,
-      data[userSelection].loss,
-      data[computerSelection].sound
+      fighters[userSelection].loss,
+      fighters[computerSelection].sound
     );
 }
 
