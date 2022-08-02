@@ -1,34 +1,37 @@
-const messages = {
+const data = {
   amongus: {
     loss: '"Can\'t believe a damn stone is stronger than me!!"',
     win: "This week's menu: rabbit stew",
-    sound: "./sounds/amongus.mp3"
+    sound: "./sounds/amongus.mp3",
+    png: "./images/sus-blue.png"
   },
   moai: {
     loss: '"NOOOO, I am the ALMIGHTY MOAI, you can\'t just sit on me!!!"',
     win: "The might of human is minuscule compared to the ALMIGHTY MOAI",
-    sound: "./sounds/boom-sound.mp3"
+    sound: "./sounds/boom-sound.mp3",
+    png: "./images/moai.png"
   },
   chungus: {
     loss: "OmegaLuL imagine killing this absolute unit",
     win: '"Ohh, look! I found a stone big enough to sit on"',
-    sound: "./sounds/chungus.mp3"
+    sound: "./sounds/chungus.mp3",
+    png: "./images/chungus.png"
   },
   impostor: {
     message: "Computer was the impostor, the RNG gods were not on your side",
-    sound: "./sounds/impostor-kill.mp3"
+    sound: "./sounds/impostor-kill.mp3",
+    png: "./images/sus-red.png"
+  },
+  crimson: {
+    message:
+      '"Once anyone witnesses King Crimson... they no longer exist in this world."',
+    sound: "./sounds/king-crimson.mp3",
+    png: "./images/moai-king-crimson.png"
   },
   tie: {
     message: "Mind reading??!?!?!?",
     sound: "./sounds/illuminati.mp3"
   }
-};
-
-const pngPaths = {
-  moai: "./images/moai.png",
-  chungus: "./images/chungus.png",
-  amongus: "./images/sus-blue.png",
-  impostor: "./images/sus-red.png"
 };
 
 const players = ["user", "computer"],
@@ -39,10 +42,10 @@ const players = ["user", "computer"],
 let userScore = 0,
   computerScore = 0;
 
-function setFighter(who, shitpost) {
+function setFighter(who, fighter) {
   document
     .getElementById(`${who}-fighter`)
-    .setAttribute("src", pngPaths[shitpost]);
+    .setAttribute("src", data[fighter].png);
 }
 
 function setScore(who, score) {
@@ -91,7 +94,7 @@ function displayMessage(message, delay) {
 }
 
 function getIndex(choice) {
-  return Object.keys(messages).indexOf(choice);
+  return Object.keys(data).indexOf(choice);
 }
 
 function playSound(source) {
@@ -127,9 +130,9 @@ function playRound(userSelection) {
   removeWasted();
 
   const computerSelection =
-    Math.random() > 0.9
+    Math.random() > 0.3
       ? "impostor" // 10% chance to get impostor
-      : Object.keys(messages)[Math.floor(Math.random() * 3)];
+      : Object.keys(data)[Math.floor(Math.random() * 3)];
 
   setFighter("user", userSelection);
   setFighter("computer", computerSelection);
@@ -138,44 +141,46 @@ function playRound(userSelection) {
     return updateUI(
       COMPUTER,
       ++computerScore,
-      messages.impostor.message,
-      messages.impostor.sound
+      data.impostor.message,
+      data.impostor.sound
     );
 
   const userSelectionIndex = getIndex(userSelection),
     computerSelectionIndex = getIndex(computerSelection);
 
   if (userSelectionIndex === computerSelectionIndex)
-    return updateUI(NONE, 0, messages.tie.message, messages.tie.sound);
+    return updateUI(NONE, 0, data.tie.message, data.tie.sound);
 
   if (Math.abs(userSelectionIndex - computerSelectionIndex) === 1)
     if (userSelectionIndex > computerSelectionIndex)
       return updateUI(
         USER,
         ++userScore,
-        messages[userSelection].win,
-        messages[userSelection].sound
+        data[userSelection].win,
+        data[userSelection].sound
       );
     else
       return updateUI(
         COMPUTER,
         ++computerScore,
-        messages[userSelection].loss,
-        messages[computerSelection].sound
+        data[userSelection].loss,
+        data[computerSelection].sound
       );
 
   if (userSelectionIndex < computerSelectionIndex)
     return updateUI(
       USER,
       ++userScore,
-      messages[userSelection].win,
-      messages[userSelection].sound
+      data[userSelection].win,
+      data[userSelection].sound
     );
   else
     return updateUI(
       COMPUTER,
       ++computerScore,
-      messages[userSelection].loss,
-      messages[computerSelection].sound
+      data[userSelection].loss,
+      data[computerSelection].sound
     );
 }
+
+document.getElementsByTagName("audio")[0].volume = 0.5;
