@@ -144,7 +144,7 @@ function playRound(userSelection) {
   removeWasted();
 
   const computerSelection =
-    Math.random() > 0.5 ? "special" : Math.floor(Math.random() * 3);
+    Math.random() > 0.9 ? "special" : Math.floor(Math.random() * 3);
 
   const userFighter = getFighter(userSelection);
   const computerFighter =
