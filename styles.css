@@ -188,19 +188,41 @@ footer a:hover i {
 }
 
 .overlay-content {
-  text-align: center;
   border: 2px solid white;
   border-radius: 10px;
   background-color: black;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .overlay-content h1 {
   font-weight: 400;
   font-size: 3rem;
-  word-spacing: 30px;
 }
 
 .overlay-content h1 span {
   font-family: "Monoton", cursive;
+  word-spacing: 30px;
+}
+
+.rules {
+  font-size: 1.5rem;
+  padding-left: 5%;
+}
+
+.rules p {
+  border-bottom: 1px white solid;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.rules span {
+  display: block;
+  padding-left: 1rem;
+  font-size: 0.75em;
+}
+
+.overlay-content > p {
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 0.95em;
 }

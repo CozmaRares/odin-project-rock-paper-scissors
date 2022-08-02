@@ -16,9 +16,7 @@
   </head>
   <body>
     <header>
-      <span onclick="openOverlay()" style="cursor: pointer">
-        FIGHT OF SHITPOSTS
-      </span>
+      <span id="title" style="cursor: pointer"> FIGHT OF SHITPOSTS </span>
     </header>
     <main>
       <div id="arena">
@@ -66,28 +64,49 @@
     </footer>
 
     <audio style="display: none"></audio>
-    <!-- <div id="overlay">
+    <div id="overlay">
       <div class="overlay-content">
-        <h1>Welcome to <span>Fight of SHITPOSTS</span></h1>
-        <div class="rules"></div>
-        <p class="close">Click anywhere to close, click title to open again</p>
+        <h1>Welcome to &nbsp;<span>Fight of SHITPOSTS</span></h1>
+        <div class="rules">
+          <p>Rules:</p>
+          <span>
+            <i class="fa-solid fa-circle-dot"></i> <i>SUS</i> eats rabbit
+          </span>
+          <span>
+            <i class="fa-solid fa-circle-dot"></i> Weird rock is stronger (wut?)
+            than a spaceman</span
+          >
+          <span>
+            <i class="fa-solid fa-circle-dot"></i> Rabbit sits on stone
+          </span>
+          <span>
+            <i class="fa-solid fa-circle-dot"></i> 10% chance to trigger a
+            special event
+          </span>
+        </div>
+        <p>Click anywhere to close, click title to open again</p>
       </div>
-    </div> -->
+    </div>
   </body>
-  <!-- <script defer>
+  <script>
     function closeOverlay() {
       document.getElementById("overlay").style.display = "none";
       document.removeEventListener("click", closeOverlay);
     }
 
     function openOverlay() {
-      document.getElementById("overlay").style.display = "block";
-      document.addEventListener("click", closeOverlay);
+      debugger;
+      document.getElementById("overlay").style.display = "flex";
+
+      // add the event listener on the next tick of the event loop
+      setTimeout(() => document.addEventListener("click", closeOverlay), 1);
     }
 
     document.addEventListener("click", closeOverlay);
 
+    document.getElementById("title").addEventListener("click", openOverlay);
+
     if (localStorage.getItem("__shitpost visited__")) closeOverlay();
     else localStorage.setItem("__shitpost visited__", true);
-  </script> -->
+  </script>
 </html>

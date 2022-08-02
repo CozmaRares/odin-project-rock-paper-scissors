@@ -101,10 +101,6 @@ function displayMessage(message, delay) {
   }, delay);
 }
 
-function getIndex(choice) {
-  return Object.keys(fighters).indexOf(choice);
-}
-
 function playSound(source) {
   const audio = document.getElementsByTagName("audio")[0];
   audio.src = source;
@@ -169,12 +165,7 @@ function playRound(userSelection) {
 
   if (Math.abs(userSelection - computerSelection) === 1)
     if (userSelection > computerSelection)
-      return updateUI(
-        USER,
-        ++userScore,
-        userFighter.win,
-        userFighter.sound
-      );
+      return updateUI(USER, ++userScore, userFighter.win, userFighter.sound);
     else
       return updateUI(
         COMPUTER,
@@ -184,12 +175,7 @@ function playRound(userSelection) {
       );
 
   if (userSelection < computerSelection)
-    return updateUI(
-      USER,
-      ++userScore,
-      userFighter.win,
-      userFighter.sound
-    );
+    return updateUI(USER, ++userScore, userFighter.win, userFighter.sound);
   else
     return updateUI(
       COMPUTER,
