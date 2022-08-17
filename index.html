@@ -73,8 +73,8 @@
             <i class="fa-solid fa-circle-dot"></i> <i>SUS</i> eats rabbit
           </span>
           <span>
-            <i class="fa-solid fa-circle-dot"></i> Weird rock is stronger (wut?)
-            than a spaceman</span
+            <i class="fa-solid fa-circle-dot"></i> Weird rock is stronger than a
+            spaceman</span
           >
           <span>
             <i class="fa-solid fa-circle-dot"></i> Rabbit sits on stone
@@ -95,18 +95,14 @@
     }
 
     function openOverlay() {
-      debugger;
       document.getElementById("overlay").style.display = "flex";
 
       // add the event listener on the next tick of the event loop
+      // so that it doesn't immediately close
       setTimeout(() => document.addEventListener("click", closeOverlay), 1);
     }
 
     document.addEventListener("click", closeOverlay);
-
     document.getElementById("title").addEventListener("click", openOverlay);
-
-    if (localStorage.getItem("__shitpost visited__")) closeOverlay();
-    else localStorage.setItem("__shitpost visited__", true);
   </script>
 </html>
