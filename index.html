@@ -19,7 +19,7 @@
       <span id="title" style="cursor: pointer"> FIGHT OF SHITPOSTS </span>
     </header>
     <main>
-      <div id="arena">
+      <section id="arena">
         <div class="challenger">
           <img src="./images/wasted.png" alt="wasted" id="user-wasted" />
           <img
@@ -36,33 +36,34 @@
           <p>Computer: <span id="computer-score">0</span></p>
         </div>
         <div id="message-box"><p></p></div>
-      </div>
-      <div class="text">Choose your fighter</div>
-      <div class="fighters">
-        <div class="fighter" onclick="playRound(0)">
-          <img src="./images/sus-blue.png" alt="amongus blue" />
-          <p>AmongSUS</p>
+      </section>
+      <section>
+        <div class="text">Choose your fighter</div>
+        <div class="fighters">
+          <div class="fighter" onclick="playRound(0)">
+            <img src="./images/sus-blue.png" alt="amongus blue" />
+            <p>AmongSUS</p>
+          </div>
+          <div class="fighter" onclick="playRound(1)">
+            <img src="./images/moai.png" alt="moai head" />
+            <p>Almighty Moai</p>
+          </div>
+          <div class="fighter" onclick="playRound(2)">
+            <img src="./images/chungus.png" alt="big chungus" />
+            <p>Big Chungus</p>
+          </div>
         </div>
-        <div class="fighter" onclick="playRound(1)">
-          <img src="./images/moai.png" alt="moai head" />
-          <p>Almighty Moai</p>
-        </div>
-        <div class="fighter" onclick="playRound(2)">
-          <img src="./images/chungus.png" alt="big chungus" />
-          <p>Big Chungus</p>
-        </div>
-      </div>
+      </section>
+      <footer>
+        <a
+          href="https://github.com/CozmaRares/odin-project-rock-paper-scissors"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Github <i class="fa-brands fa-github"></i>
+        </a>
+      </footer>
     </main>
-    <footer>
-      <a
-        href="https://github.com/CozmaRares/odin-project-rock-paper-scissors"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Github <i class="fa-brands fa-github"></i>
-      </a>
-    </footer>
-
     <audio style="display: none"></audio>
     <div id="overlay">
       <div class="overlay-content">

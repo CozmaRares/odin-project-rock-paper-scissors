@@ -1,3 +1,12 @@
+let specialChance = 0.1;
+
+function setSpecialChance(value) {
+  if (value < 0) value = 0;
+  else if (value > 1) value = 1;
+
+  specialChance = value;
+}
+
 const fighters = {
     amongus: {
       loss: '"Can\'t believe a damn stone is stronger than me!!"',
@@ -140,7 +149,7 @@ function playRound(userSelection) {
   removeWasted();
 
   const computerSelection =
-    Math.random() > 0.9 ? "special" : Math.floor(Math.random() * 3);
+    Math.random() < specialChance ? "special" : Math.floor(Math.random() * 3);
 
   const userFighter = getFighter(userSelection);
   const computerFighter =
